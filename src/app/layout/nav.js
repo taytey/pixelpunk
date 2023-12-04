@@ -1,6 +1,5 @@
 import Link from "next/link";
 export default function Nav() {
-
     return(
         <main>
             <nav className="bg-none fixed w-full z-20 start-0 bg-black backdrop-blur-3xl py-3 bg-opacity-50">

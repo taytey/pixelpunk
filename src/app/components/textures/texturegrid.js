@@ -86,7 +86,7 @@ export default function TextureGrid() {
                                             </div>
                                             <div className="flex justify-end absolute right-0 bottom-5">
                                                 <PlusIcon className="ml-10 h-8 tracking-widest font-montserrat font-extralight hover:bg-neutral-800 text-neutral-500 hover:text-neutral-200 bg-opacity-50 rounded-3xl py-1 px-4 transition-all duration-500"/>
-                                                <button className="ml-10 mr-4 tracking-widest font-montserrat font-extralight hover:bg-neutral-800 text-neutral-500 hover:text-neutral-200 bg-opacity-50 rounded-3xl py-1 px-4 transition-all duration-500">Download</button>
+                                                <button className="ml-10 mr-4 tracking-widest font-montserrat hover:bg-neutral-200 text-neutral-500 hover:text-black bg-opacity-50 py-1 mx-4 transition-all duration-200">Download</button>
                                             </div>
 
                                         </div>
