@@ -8,7 +8,7 @@ export async function POST(request) {
 
     const result = await prisma.texturepacks.create({
         data: {
-            name,
+            name
         }
     })
     return NextResponse.json({result})

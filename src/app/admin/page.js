@@ -2,12 +2,26 @@
 import { PlusIcon} from "@heroicons/react/24/outline";
 import {useEffect, useState} from "react";
 import {XMarkIcon} from "@heroicons/react/20/solid";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import {storage} from "@/firebase-config"
 
 export default function Admin() {
 
     const [visibility, setVisibility ] = useState(false);
     const [name, setName] = useState('');
+    const [imageUpload, setImageUpload] = useState();
 
+    const uploadFile = () => {
+        if (!imageUpload) return;
+
+        const imageRef = ref(storage, `pixelpunk/images/${imageUpload.name}`);
+
+        uploadBytes(imageRef, imageUpload).then((snapshot) => {
+            getDownloadURL(snapshot.ref).then((url) => {
+                console.log(url)
+            });
+        });
+    };
 
     const handleNameChange = (event) => {
         setName(event.target.value);
@@ -15,11 +29,16 @@ export default function Admin() {
 
     async function handleClick() {
         try {
-            fetch('/api/add-texturepack', {method: 'POST', headers: {'Content-Type' : 'application/json'}, body: JSON.stringify({name})})
+            fetch('/api/add-texturepack', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({name})
+            })
         } catch (error) {
             console.error(error);
         }
     }
+
     return(
         <div>
             <div className=" pt-40 pl-40">
@@ -44,7 +63,13 @@ export default function Admin() {
                             <form onSubmit={handleClick} className="flex gap-4">
                                 <input onChange={handleNameChange} className="bg-neutral-800 select-none tracking-widest font-extrabold h-20 text-5xl rounded-lg focus:ring-0 focus:ring-offset-0 placeholder:font-extralight placeholder:tracking-widest placeholder:pl-10" value={name}  placeholder="Name"/>
                                 <input className="bg-neutral-800 select-none tracking-widest font-extrabold h-20 text-5xl rounded-lg focus:ring-0 focus:ring-offset-0 placeholder:font-extralight placeholder:tracking-widest placeholder:pl-10" placeholder="Thumbnail"/>
-                                <button type="submit"><PlusIcon className="select-none h-10 text-white hover:bg-neutral-200 transition-all duration-200 hover:text-black"/></button>
+                                <input
+                                    type="file"
+                                    onChange={(event) => {
+                                        setImageUpload(event.target.files[0]);
+                                    }
+                                }/>
+                                <button type="submit" onClick={uploadFile}><PlusIcon className="select-none h-10 text-white hover:bg-neutral-200 transition-all duration-200 hover:text-black"/></button>
                             </form>
 
                         </div>

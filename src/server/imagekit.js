@@ -1,1 +1,0 @@
-const urlEndpoint = 'https://ik.imagekit.io/ihe2wqrgq/';
