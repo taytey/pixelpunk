@@ -53,7 +53,7 @@ export default function Admin() {
             <div className="pt-40 pl-20">
                 <h1 className="font-montserrat tracking-widest font-bold text-5xl select-none">Admin Dashboard</h1>
             </div>
-            <div className=" grid grid-cols-1 md:grid-cols-3 sm:grid-cols-1 gap-4 m-20" onClick={() => {setVisibility(true)}}>
+            <div className=" absolute grid grid-cols-1 md:grid-cols-3 sm:grid-cols-1 gap-4 m-20" onClick={() => {setVisibility(true)}}>
                 <div className="hover:opacity-50 hover:border-4 bg-neutral-400 h-96 w-96 flex items-center justify-center opacity-75 rounded-lg hover:scale-110 transition-all duration-500">
                     <PlusIcon className="h-20 text-white"/>
                 </div>
@@ -62,20 +62,21 @@ export default function Admin() {
                 </div>
             </div>
             { visibility &&
-                <div className="absolute flex justify-between bg-neutral-950/50 h-screen w-screen">
+                <div className="absolute flex justify-between bg-black top-40">
                     <XMarkIcon className=" text-white"/>
                     <div>
                         <div className="flex justify-center items-center">
                             <h1 className="text-5xl font-montserrat tracking-widest m-10 select-none font-bold">Add a new <span className="hover:text-black transition-all duration-200 hover:bg-neutral-200">Texturepack</span></h1>
                         </div>
-                        <div className="flex w-screen items-center justify-center">
-                            <div className="flex gap-4">
-                                <input onChange={handleNameChange} className="bg-neutral-800 select-none tracking-widest font-extrabold h-20 text-5xl rounded-lg focus:ring-0 focus:ring-offset-0 placeholder:font-extralight placeholder:tracking-widest placeholder:pl-10" value={name}  placeholder="Name"/>
-                                <input className="bg-neutral-800 select-none tracking-widest font-extrabold h-20 text-5xl rounded-lg focus:ring-0 focus:ring-offset-0 placeholder:font-extralight placeholder:tracking-widest placeholder:pl-10" placeholder="Thumbnail"/>
-                                <input
+                        <div className="flex flex-col w-screen m-10  items-center justify-center">
+                            <div className="flex flex-col gap-10">
+                                <input onChange={handleNameChange} className="bg-black focus:placeholder:text-opacity-0 select-none tracking-widest placeholder:text-neutral-700 outline-0 focus:bg-neutral-900 transition-all duration-500 font-extrabold h-20 text-5xl rounded-lg focus:ring-0 focus:ring-offset-0 placeholder:font-extralight placeholder:tracking-widest placeholder:pl-10" value={name}  placeholder="Name"/>
+                                <input className="bg-black focus:placeholder:text-opacity-0 select-none tracking-widest font-extrabold h-20 text-5xl placeholder:text-neutral-700 transition-all duration-500 focus:bg-neutral-900 outline-0 rounded-lg focus:ring-0 focus:ring-offset-0 placeholder:font-extralight placeholder:tracking-widest placeholder:pl-10" placeholder="Thumbnail"/>
+                                <input className="block w-full text-sm text-neutral-900 border border-neutral-900 rounded-lg cursor-pointer bg-neutral-800 focus:outline-none dark:border-gray-600 dark:placeholder-gray-400"
                                     type="file"
                                     onChange={handleImageChange}
                                 />
+
                                 <button onClick={ () => {
                                     uploadFile();
                                         addData();
@@ -84,6 +85,9 @@ export default function Admin() {
                                     <h1 className="text-red-600">{uploadStatus}</h1>
                                 }
 
+                            </div>
+                            <div onClick={() => {setVisibility(false)}}>
+                                Close
                             </div>
 
                         </div>

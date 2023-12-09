@@ -53,11 +53,11 @@ export default function TextureGrid() {
                                                     {texturepacks.name}
                                                 </motion.div>
                                             }
-                                                    <img key={texturepacks.id}  className="hover:scale-105 h-auto max-w-full hover:rounded-md opacity-70 hover:opacity-10 hover:border-2 hover:border-white border-neutral-700 transition-all duration-500"  src={texturepacks.thumbnail} alt={texturepacks.name}/>
+                                                    <img key={texturepacks.id}  className=" hover:scale-105 h-auto max-w-full hover:rounded-md opacity-70 hover:opacity-10 hover:border-2 hover:border-white border-neutral-700 transition-all duration-500"  src={texturepacks.thumbnail} alt={texturepacks.name}/>
                                         </div>
                                     </motion.div>
-
                             </button>
+
                         </div>
                     ))}
                     <AnimatePresence>
@@ -68,7 +68,7 @@ export default function TextureGrid() {
                                     exit={{ opacity: 0 }}
                                     transition={{ ease: "easeInOut", duration: 0.2}}
                                 >
-                                    <div className="flex items-center justify-center ">
+                                    <div className="flex items-center justify-center">
                                         <div className=" fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-5/6 w-5/6 backdrop-blur-2xl bg-neutral-950/90 transition-all duration-500 inset-0 z-50 drop-shadow-2xl rounded-2xl">
                                             <div className="flex justify-between">
                                                 <div>

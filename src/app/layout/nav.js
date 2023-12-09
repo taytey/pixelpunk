@@ -5,7 +5,7 @@ export default function Nav() {
             <nav className="bg-none fixed w-full z-20 start-0 bg-black backdrop-blur-3xl py-3 bg-opacity-50">
                 <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                     <Link href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
-                        <h1 className="text-neutral-200 font-montserrat font-bold tracking-widest">PIXELPUNK</h1>
+                        <h1 className="text-neutral-200 font-montserrat font-bold tracking-widest hover:text-black hover:bg-neutral-200 transition-all duration-200">PIXELPUNK</h1>
                     </Link>
                     <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
                         <button type="button" className="font-montserrat tracking-widest text-white hover:bg-neutral-800 rounded-3xl focus:ring-4 focus:outline-none transition-all duration-500 focus:ring-neutral-300 font-medium text-sm px-6 py-2 text-center dark:hover:bg-neutral-700 dark:focus:ring-neutral-800 "><Link href="/admin">ADMIN</Link></button>
@@ -19,16 +19,16 @@ export default function Nav() {
                     <div className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
                         <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 dark:border-gray-700">
                             <li>
-                                <Link href="/" className="block font-light font-montserrat  py-2 px-3 text-neutral-300 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-neutral-700 md:p-0 md:dark:hover:text-neutral-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 transition-all duration-500 tracking-widest">h o m e</Link>
+                                <Link href="/" className="block font-normal font-montserrat my-2 mx-3 text-neutral-300 hover:text-black hover:bg-neutral-200 transition-all duration-200 tracking-widest">h o m e</Link>
                             </li>
                             <li>
-                                <Link href="/skins" className="block font-light font-montserrat  py-2 px-3 text-neutral-300 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-neutral-700 md:p-0 md:dark:hover:text-neutral-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 transition-all duration-500 tracking-widest">s k i n s</Link>
+                                <Link href="/skins" className="block font-normal  font-montserrat  my-2 mx-3 text-neutral-300  hover:text-black hover:bg-neutral-200 transition-all duration-200 tracking-widest">s k i n s</Link>
                             </li>
                             <li>
-                                <Link href="/textures" className="block font-light font-montserrat  py-2 px-3 text-neutral-300 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-neutral-700 md:p-0 md:dark:hover:text-neutral-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 transition-all duration-500 tracking-widest">t e x t u r e s</Link>
+                                <Link href="/textures" className="block font-normal  font-montserrat  my-2 mx-3 text-neutral-300 hover:text-black hover:bg-neutral-200 transition-all duration-200 tracking-widest">t e x t u r e s</Link>
                             </li>
                             <li>
-                                <Link href="/textures" className="block font-light font-montserrat  py-2 px-3 text-neutral-300 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-neutral-700 md:p-0 md:dark:hover:text-neutral-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 transition-all duration-500 tracking-widest">s t a t s</Link>
+                                <Link href="/textures" className="block font-normal  font-montserrat  my-2 mx-3 text-neutral-300 hover:text-black hover:bg-neutral-200 transition-all duration-200 tracking-widest">s t a t s</Link>
                             </li>
                         </ul>
                     </div>
