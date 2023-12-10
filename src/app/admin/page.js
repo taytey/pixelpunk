@@ -57,7 +57,7 @@ export default function Admin() {
     const handleUsernameChange = async (event) => {
         setUsername(event.target.value)
         const response = await fetch(`https://playerdb.co/api/player/minecraft/${username}`).then(response => response.json())
-        const id = response.data.player.id
+        const id = setID(response.data.player.id)
         console.log(id)
     }
 
@@ -122,7 +122,7 @@ export default function Admin() {
                         <div className="flex flex-col w-screen m-10  items-center justify-center">
                             <div className="flex flex-col gap-10">
                                 <input onChange={handleUsernameChange} className="bg-black focus:placeholder:text-opacity-0 select-none tracking-widest placeholder:text-neutral-700 outline-0 focus:bg-neutral-900 transition-all duration-500 font-extrabold h-20 text-5xl rounded-lg focus:ring-0 focus:ring-offset-0 placeholder:font-extralight placeholder:tracking-widest placeholder:pl-10"  placeholder="Username"/>
-                                <input className="bg-black focus:placeholder:text-opacity-0 select-none tracking-widest font-extrabold h-20 text-5xl placeholder:text-neutral-700 transition-all duration-500 focus:bg-neutral-900 outline-0 rounded-lg focus:ring-0 focus:ring-offset-0 placeholder:font-extralight placeholder:tracking-widest placeholder:pl-10" placeholder="UUID"/>
+                                <input className="bg-black focus:placeholder:text-opacity-0 select-none tracking-widest font-extrabold h-20 text-5xl placeholder:text-neutral-700 transition-all duration-500 focus:bg-neutral-900 outline-0 rounded-lg focus:ring-0 focus:ring-offset-0 placeholder:font-extralight placeholder:tracking-widest placeholder:pl-10" placeholder="UUID" value={id}/>
 
                                 <ReactSkinview3d
                                     skinUrl="https://mc-heads.net/skin/c5ef3347-4593-4f39-8bb1-2eaa40dd986e"
