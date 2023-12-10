@@ -5,16 +5,22 @@ import {XMarkIcon} from "@heroicons/react/20/solid";
 import { ref, uploadBytes, getDownloadURL, getStorage } from "firebase/storage";
 import { storage, db } from '@/firebase-config'
 import {doc, getFirestore, setDoc, addDoc, collection} from "firebase/firestore";
+import ReactSkinview3d from "react-skinview3d"
+
 
 
 export default function Admin() {
 
-    const [visibility, setVisibility ] = useState(false);
+    const [texturepackVisibility, setTexturepackVisibility ] = useState(false);
+    const [skinVisibility, setSkinVisibility] = useState(false);
     const [name, setName] = useState('');
     const [imageUpload, setImageUpload] = useState(null);
     const [uploadStatus, setUploadStatus] = useState('');
     const [ texturepackURL, setTexturepackURL] = useState('');
-    const [ user, setUser] = useState('Tayte')
+    const [ user, setUser] = useState('Tayte');
+    const [ username, setUsername ] = useState('');
+    const [ id, setID] = useState();
+    const [ data, setData ] = useState();
 
     const addData = async () => {
         await setDoc(doc(db, "texturepacks", `${name}`), {
@@ -48,20 +54,30 @@ export default function Admin() {
         setImageUpload(event.target.files[0])
     }
 
+    const handleUsernameChange = async (event) => {
+        setUsername(event.target.value)
+        const response = await fetch(`https://playerdb.co/api/player/minecraft/${username}`).then(response => response.json())
+        const id = response.data.player.id
+        console.log(id)
+    }
+
     return(
         <div>
             <div className="pt-40 pl-20">
                 <h1 className="font-montserrat tracking-widest font-bold text-5xl select-none">Admin Dashboard</h1>
             </div>
-            <div className=" absolute grid grid-cols-1 md:grid-cols-3 sm:grid-cols-1 gap-4 m-20" onClick={() => {setVisibility(true)}}>
-                <div className="hover:opacity-50 hover:border-4 bg-neutral-400 h-96 w-96 flex items-center justify-center opacity-75 rounded-lg hover:scale-110 transition-all duration-500">
-                    <PlusIcon className="h-20 text-white"/>
+            <div className="pt-20 pl-20">
+                <h1 className="font-montserrat font-light tracking-widest text-3xl">Add content</h1>
+            </div>
+            <div className="absolute grid grid-cols-1 md:grid-cols-3 sm:grid-cols-1 gap-10 m-20" >
+                <div onClick={() => {setTexturepackVisibility(true)}} className="hover:opacity-50 hover:border-4 bg-neutral-400 h-96 w-96 flex items-center justify-center opacity-75 rounded-lg hover:scale-110 transition-all duration-500">
+                    <h1 className="select-none font-montserrat tracking-widest font-bold text-3xl">Texturepacks</h1>
                 </div>
-                <div>
-
+                <div onClick={() => {setSkinVisibility(true)}} className="hover:opacity-50 hover:border-4 bg-neutral-400 h-96 w-96 flex items-center justify-center opacity-75 rounded-lg hover:scale-110 transition-all duration-500">
+                    <h1 className="select-none font-montserrat tracking-widest font-bold text-3xl">Players</h1>
                 </div>
             </div>
-            { visibility &&
+            { texturepackVisibility &&
                 <div className="absolute flex justify-between bg-black top-40">
                     <XMarkIcon className=" text-white"/>
                     <div>
@@ -86,7 +102,37 @@ export default function Admin() {
                                 }
 
                             </div>
-                            <div onClick={() => {setVisibility(false)}}>
+
+                            <div onClick={() => {setTexturepackVisibility(false)}}>
+                                Close
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            }
+
+            { skinVisibility &&
+                <div className="absolute flex justify-between bg-black top-40">
+                    <XMarkIcon className=" text-white"/>
+                    <div>
+                        <div className="flex justify-center items-center">
+                            <h1 className="text-5xl font-montserrat tracking-widest m-10 select-none font-bold">Add a new <span className="hover:text-black transition-all duration-200 hover:bg-neutral-200">Player</span></h1>
+                        </div>
+                        <div className="flex flex-col w-screen m-10  items-center justify-center">
+                            <div className="flex flex-col gap-10">
+                                <input onChange={handleUsernameChange} className="bg-black focus:placeholder:text-opacity-0 select-none tracking-widest placeholder:text-neutral-700 outline-0 focus:bg-neutral-900 transition-all duration-500 font-extrabold h-20 text-5xl rounded-lg focus:ring-0 focus:ring-offset-0 placeholder:font-extralight placeholder:tracking-widest placeholder:pl-10"  placeholder="Username"/>
+                                <input className="bg-black focus:placeholder:text-opacity-0 select-none tracking-widest font-extrabold h-20 text-5xl placeholder:text-neutral-700 transition-all duration-500 focus:bg-neutral-900 outline-0 rounded-lg focus:ring-0 focus:ring-offset-0 placeholder:font-extralight placeholder:tracking-widest placeholder:pl-10" placeholder="UUID"/>
+
+                                <ReactSkinview3d
+                                    skinUrl="https://mc-heads.net/skin/c5ef3347-4593-4f39-8bb1-2eaa40dd986e"
+                                    height="300"
+                                    width="300"
+                                />
+
+                            </div>
+                            <button onClick={handleUsernameChange}>Convert username to id</button>
+                            <div onClick={() => {setSkinVisibility(false)}}>
                                 Close
                             </div>
 
