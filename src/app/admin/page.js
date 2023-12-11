@@ -18,9 +18,10 @@ export default function Admin() {
     const [uploadStatus, setUploadStatus] = useState('');
     const [ texturepackURL, setTexturepackURL] = useState('');
     const [ user, setUser] = useState('Tayte');
-    const [ username, setUsername ] = useState('');
-    const [ id, setID] = useState();
+    const [ username, setUsername ] = useState(null);
+    const [ uuid, setUUID] = useState("");
     const [ data, setData ] = useState();
+    const [ skin, setSkin ] = useState("");
 
     const addData = async () => {
         await setDoc(doc(db, "texturepacks", `${name}`), {
@@ -28,6 +29,15 @@ export default function Admin() {
             thumbnail: {texturepackURL},
             user: {user}
             //user:
+        });
+    }
+
+    const playerFirebase = async () => {
+
+        await setDoc(doc(db, "players", "username"), {
+            skin: {skin},
+            username: {username},
+            uuid: {uuid}
         });
     }
 
@@ -45,20 +55,16 @@ export default function Admin() {
             });
         });
     };
-
-    const handleNameChange = (event) => {
-        setName(event.target.value);
-    }
-
+    
     const handleImageChange = (event) => {
         setImageUpload(event.target.files[0])
     }
 
     const handleUsernameChange = async (event) => {
-        setUsername(event.target.value)
         const response = await fetch(`https://playerdb.co/api/player/minecraft/${username}`).then(response => response.json())
-        const id = setID(response.data.player.id)
-        console.log(id)
+        setUUID(response.data.player.id)
+        setSkin(`https://mc-heads.net/skin/${uuid}`)
+        console.log(skin);
     }
 
     return(
@@ -86,7 +92,7 @@ export default function Admin() {
                         </div>
                         <div className="flex flex-col w-screen m-10  items-center justify-center">
                             <div className="flex flex-col gap-10">
-                                <input onChange={handleNameChange} className="bg-black focus:placeholder:text-opacity-0 select-none tracking-widest placeholder:text-neutral-700 outline-0 focus:bg-neutral-900 transition-all duration-500 font-extrabold h-20 text-5xl rounded-lg focus:ring-0 focus:ring-offset-0 placeholder:font-extralight placeholder:tracking-widest placeholder:pl-10" value={name}  placeholder="Name"/>
+                                <input onChange={(event) => {setName(event.target.value)}} className="bg-black focus:placeholder:text-opacity-0 select-none tracking-widest placeholder:text-neutral-700 outline-0 focus:bg-neutral-900 transition-all duration-500 font-extrabold h-20 text-5xl rounded-lg focus:ring-0 focus:ring-offset-0 placeholder:font-extralight placeholder:tracking-widest placeholder:pl-10" value={name}  placeholder="Name"/>
                                 <input className="bg-black focus:placeholder:text-opacity-0 select-none tracking-widest font-extrabold h-20 text-5xl placeholder:text-neutral-700 transition-all duration-500 focus:bg-neutral-900 outline-0 rounded-lg focus:ring-0 focus:ring-offset-0 placeholder:font-extralight placeholder:tracking-widest placeholder:pl-10" placeholder="Thumbnail"/>
                                 <input className="block w-full text-sm text-neutral-900 border border-neutral-900 rounded-lg cursor-pointer bg-neutral-800 focus:outline-none dark:border-gray-600 dark:placeholder-gray-400"
                                     type="file"
@@ -121,18 +127,20 @@ export default function Admin() {
                         </div>
                         <div className="flex flex-col w-screen m-10  items-center justify-center">
                             <div className="flex flex-col gap-10">
-                                <input onChange={handleUsernameChange} className="bg-black focus:placeholder:text-opacity-0 select-none tracking-widest placeholder:text-neutral-700 outline-0 focus:bg-neutral-900 transition-all duration-500 font-extrabold h-20 text-5xl rounded-lg focus:ring-0 focus:ring-offset-0 placeholder:font-extralight placeholder:tracking-widest placeholder:pl-10"  placeholder="Username"/>
-                                <input className="bg-black focus:placeholder:text-opacity-0 select-none tracking-widest font-extrabold h-20 text-5xl placeholder:text-neutral-700 transition-all duration-500 focus:bg-neutral-900 outline-0 rounded-lg focus:ring-0 focus:ring-offset-0 placeholder:font-extralight placeholder:tracking-widest placeholder:pl-10" placeholder="UUID" value={id}/>
+                                <input onChange={(event) => {setUsername(event.target.value)}} className="bg-black focus:placeholder:text-opacity-0 select-none tracking-widest placeholder:text-neutral-700 outline-0 focus:bg-neutral-900 transition-all duration-500 font-extrabold h-20 text-5xl rounded-lg focus:ring-0 focus:ring-offset-0 placeholder:font-extralight placeholder:tracking-widest placeholder:pl-10"  placeholder="Username"/>
+                                <input className="bg-black focus:placeholder:text-opacity-0 select-none tracking-widest font-extrabold h-20 text-5xl placeholder:text-neutral-700 transition-all duration-500 focus:bg-neutral-900 outline-0 rounded-lg focus:ring-0 focus:ring-offset-0 placeholder:font-extralight placeholder:tracking-widest placeholder:pl-10" placeholder="UUID" value={uuid}/>
 
                                 <ReactSkinview3d
-                                    skinUrl="https://mc-heads.net/skin/c5ef3347-4593-4f39-8bb1-2eaa40dd986e"
+                                    skinUrl={`https://mc-heads.net/skin/${uuid}`}
                                     height="300"
                                     width="300"
                                 />
 
                             </div>
                             <button onClick={handleUsernameChange}>Convert username to id</button>
-                            <div onClick={() => {setSkinVisibility(false)}}>
+                            <button onClick={playerFirebase}
+                             className="border-4">Submit</button>
+                            <div onClick={() => {setSkinVisibility(false); setUUID(null)} }>
                                 Close
                             </div>
 
