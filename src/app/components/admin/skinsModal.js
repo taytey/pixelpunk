@@ -1,43 +1,38 @@
 import {XMarkIcon} from "@heroicons/react/20/solid";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ReactSkinview3d from "react-skinview3d"
 import { db } from '@/firebase-config'
 import { doc, setDoc } from "firebase/firestore";
 
 export default function SkinsModal({ change }) {
 
-    const [ uuid, setUUID] = useState("");
-    const [ skin, setSkin ] = useState("");
+    const [ uuid, setUUID] = useState('');
+    const [ skin, setSkin ] = useState('');
     const [ username, setUsername ] = useState(null);
-    const [ response, setResponse ] = useState();
 
-    //grabs fetch data and updates UUID and skin
-    const handleUsernameChange = async (event) => {
-        try {
+    useEffect(() => {
+        fetchData();
+    })
+
+    const fetchData = async () => {
             const response = await fetch(`https://playerdb.co/api/player/minecraft/${username}`).then(response => response.json())
-            setResponse(response);
-            setUUID(response.data.player.id)
-            setSkin(`https://mc-heads.net/skin/${uuid}`)
-            
-        } catch (error) {
-            console.log(error)
-        } finally {
-            console.log("Working")
-            
-        }
-    
+            setStates(response)
+    }
+
+    const setStates = async (response) => {
+        const skin = `https://mc-heads.net/skin/${uuid}`
+        setUUID(response.data.player.id)
+        setSkin(skin)
     }
 
     //adds data to player collection in Firestore via input tags
     const playerFirebase = async () => {
-        await setDoc(doc(db, "players", "username"), {
-            skin: {skin},
-            username: {username},
-            uuid: {uuid}
+        await setDoc(doc(db, "players", `${username}`), {
+            username: { username },
+            uuid: { uuid },
+            skin: { skin },
         });
     }
-
-
 
     return (
         <div className="absolute flex justify-between bg-black top-40">
@@ -48,8 +43,8 @@ export default function SkinsModal({ change }) {
                 </div>
                 <div className="flex flex-col w-screen m-10  items-center justify-center">
                     <div className="flex flex-col gap-10">
-                        <input onChange={(event) => { setUsername(event.target.value) }} className="bg-black focus:placeholder:text-opacity-0 select-none tracking-widest placeholder:text-neutral-700 outline-0 focus:bg-neutral-900 transition-all duration-500 font-extrabold h-20 text-5xl rounded-lg focus:ring-0 focus:ring-offset-0 placeholder:font-extralight placeholder:tracking-widest placeholder:pl-10" placeholder="Username" />
-                        <input className="bg-black focus:placeholder:text-opacity-0 select-none tracking-widest font-extrabold h-20 text-5xl placeholder:text-neutral-700 transition-all duration-500 focus:bg-neutral-900 outline-0 rounded-lg focus:ring-0 focus:ring-offset-0 placeholder:font-extralight placeholder:tracking-widest placeholder:pl-10" placeholder="UUID" value={uuid} />
+                        <input onChange={(event) => setUsername(event.target.value)} className="bg-black focus:placeholder:text-opacity-0 select-none tracking-widest placeholder:text-neutral-700 outline-0 focus:bg-neutral-900 transition-all duration-500 font-extrabold h-20 text-5xl rounded-lg focus:ring-0 focus:ring-offset-0 placeholder:font-extralight placeholder:tracking-widest placeholder:pl-10" placeholder="Username" />
+                        <input onChange={(event) => {setUUID(event.target.value)}} className="bg-black focus:placeholder:text-opacity-0 select-none tracking-widest font-extrabold h-20 text-5xl placeholder:text-neutral-700 transition-all duration-500 focus:bg-neutral-900 outline-0 rounded-lg focus:ring-0 focus:ring-offset-0 placeholder:font-extralight placeholder:tracking-widest placeholder:pl-10" placeholder="UUID" value={uuid}/>
 
                         <ReactSkinview3d
                             skinUrl={`https://mc-heads.net/skin/${uuid}`}
@@ -58,10 +53,10 @@ export default function SkinsModal({ change }) {
                         />
 
                     </div>
-                    <button onClick={handleUsernameChange}>Convert username to id</button>
+
                     <button onClick={playerFirebase}
                         className="border-4">Submit</button>
-                    <div onClick={() => { change(); setUUID(null) }}>
+                    <div onClick={() => { change()}}>
                         Close
                     </div>
 

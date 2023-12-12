@@ -1,6 +1,6 @@
 import {XMarkIcon} from "@heroicons/react/20/solid";
 import { PlusIcon} from "@heroicons/react/24/outline";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ref, uploadBytes, getDownloadURL, getStorage } from "firebase/storage";
 import { storage, db } from '@/firebase-config'
 import { doc, setDoc } from "firebase/firestore";
@@ -11,8 +11,7 @@ export default function TexturepackModal ({ change }) {
     const [name, setName] = useState('');
     const [ texturepackURL, setTexturepackURL] = useState('');
     const [ user, setUser] = useState('Tayte');
-
-
+    
     //adds data via input fields to firestore texturepacks collection
     const addData = async () => {
         await setDoc(doc(db, "texturepacks", `${name}`), {
