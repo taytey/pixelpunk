@@ -1,9 +1,8 @@
 'use client'
 
-import TextureGrid from "@/app/components/textures/texturegrid";
-import TexturesHome from "@/app/components/textures/textureshome";
 import {ParallaxProvider} from "react-scroll-parallax";
-
+import TexturesHome from "../components/textures/textureshome"
+import TextureGrid from "../components/textures/texturegrid"
 export default function Page() {
     return (
             <main>

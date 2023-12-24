@@ -1,4 +1,4 @@
-import Nav from "@/app/layout/nav";
+import Nav from "../layout/nav";
 
 export default function TexturesLayout({
         children, // will be a page or nested layout

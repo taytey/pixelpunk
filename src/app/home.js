@@ -1,9 +1,7 @@
-
-import Nav from "@/app/layout/nav";
-import PortfolioButton from "@/app/components/hero/portfoliobutton";
-import TayteButton from "@/app/components/hero/taytebutton";
-import HeroText from "@/app/components/hero/herotext";
-
+import Nav from "../app/layout/nav";
+import PortfolioButton from "../app/components/hero/portfoliobutton";
+import TayteButton from "../app/components/hero/taytebutton";
+import HeroText from "../app/components/hero/herotext";
 export default function Home() {
     return(
         <main>
@@ -11,7 +9,6 @@ export default function Home() {
                 <PortfolioButton/>
                 <TayteButton />
                 <Nav/>
-
         </main>
         )
 }

@@ -2,24 +2,36 @@ import {XMarkIcon} from "@heroicons/react/20/solid";
 import { PlusIcon} from "@heroicons/react/24/outline";
 import { useEffect, useState } from "react";
 import { ref, uploadBytes, getDownloadURL, getStorage } from "firebase/storage";
-import { storage, db } from '@/firebase-config'
-import { doc, setDoc } from "firebase/firestore";
+import { storage, db } from '../../..//firebase-config'
+import {doc, setDoc, serverTimestamp, collection} from "firebase/firestore";
+import { v4 as uuidv4 } from 'uuid';
+
 
 export default function TexturepackModal ({ change }) {
 
+    //TODO ability to upload multiple images and add to database
+
     const [imageUpload, setImageUpload] = useState(null);
     const [name, setName] = useState('');
-    const [ texturepackURL, setTexturepackURL] = useState('');
-    const [ user, setUser] = useState('Tayte');
-    
+    const [ thumbnail, setThumbnail] = useState('');
+    const [ author, setAuthor] = useState('');
+    const [ description, setDescription] = useState('');
+    const collectionRef = collection(db, 'texturepacks');
+
     //adds data via input fields to firestore texturepacks collection
+    const texturepackData = {
+        name,
+        thumbnail,
+        description,
+        author,
+        createdAt: serverTimestamp(),
+        id: uuidv4(),
+    }
+
+
     const addData = async () => {
-        await setDoc(doc(db, "texturepacks", `${name}`), {
-            name: {name},
-            thumbnail: {texturepackURL},
-            user: {user}
-            //user:
-        });
+        const texturepackRef = doc(collectionRef, texturepackData.name);
+        await setDoc( texturepackRef, texturepackData)
     }
 
     //uploads file to Firebase storage
@@ -30,7 +42,7 @@ export default function TexturepackModal ({ change }) {
         uploadBytes(imageRef, imageUpload).then((snapshot) => {
             getDownloadURL(snapshot.ref).then((url) => {
                 console.log(url)
-                setTexturepackURL(url)
+                setThumbnail(url)
 
             });
         });
@@ -45,18 +57,37 @@ export default function TexturepackModal ({ change }) {
             </div>
             <div className="flex flex-col w-screen m-10  items-center justify-center">
                 <div className="flex flex-col gap-10">
-                    <input onChange={(event) => {setName(event.target.value)}} className="bg-black focus:placeholder:text-opacity-0 select-none tracking-widest placeholder:text-neutral-700 outline-0 focus:bg-neutral-900 transition-all duration-500 font-extrabold h-20 text-5xl rounded-lg focus:ring-0 focus:ring-offset-0 placeholder:font-extralight placeholder:tracking-widest placeholder:pl-10" value={name}  placeholder="Name"/>
-                    <input className="bg-black focus:placeholder:text-opacity-0 select-none tracking-widest font-extrabold h-20 text-5xl placeholder:text-neutral-700 transition-all duration-500 focus:bg-neutral-900 outline-0 rounded-lg focus:ring-0 focus:ring-offset-0 placeholder:font-extralight placeholder:tracking-widest placeholder:pl-10" placeholder="Thumbnail"/>
-                    <input className="block w-full text-sm text-neutral-900 border border-neutral-900 rounded-lg cursor-pointer bg-neutral-800 focus:outline-none dark:border-gray-600 dark:placeholder-gray-400"
+                    <input onChange={(event) => {
+                        setName(event.target.value)
+                    }}
+                           className="bg-black focus:placeholder:text-opacity-0 select-none tracking-widest placeholder:text-neutral-700 outline-0 focus:bg-neutral-900 transition-all duration-500 font-extrabold h-20 text-5xl rounded-lg focus:ring-0 focus:ring-offset-0 placeholder:font-extralight placeholder:tracking-widest placeholder:pl-10"
+                           value={name} placeholder="Name"/>
+                    <input onChange={(event) => {
+                        setAuthor(event.target.value)
+                    }}
+                           className="bg-black focus:placeholder:text-opacity-0 select-none tracking-widest placeholder:text-neutral-700 outline-0 focus:bg-neutral-900 transition-all duration-500 font-extrabold h-20 text-5xl rounded-lg focus:ring-0 focus:ring-offset-0 placeholder:font-extralight placeholder:tracking-widest placeholder:pl-10"
+                           value={author} placeholder="Author"/>
+
+                    <textarea onChange={(event) => {
+                        setDescription(event.target.value)
+                    }}
+                              className="bg-black focus:placeholder:text-opacity-0 select-none placeholder:text-neutral-700 outline-0 focus:bg-neutral-900 transition-all duration-500 font-extrabold text- rounded-lg focus:ring-0 focus:ring-offset-0 placeholder:font-extralight placeholder:tracking-widest placeholder:pl-10"
+                              placeholder="Description" rows="10" cols="50"></textarea>
+                    <input
+                        className="block w-full text-sm text-neutral-900 border border-neutral-900 rounded-lg cursor-pointer bg-neutral-800 focus:outline-none dark:border-gray-600 dark:placeholder-gray-400"
                         type="file"
-                        onChange={(event) => {setImageUpload(event.target.files[0])}}
+                        onChange={(event) => {
+                            setImageUpload(event.target.files[0])
+                        }}
                     />
 
-                    <button onClick={ () => {
+                    <button onClick={() => {
                         uploadFile();
-                            addData();
-                    }}><PlusIcon className="select-none h-10 text-white hover:bg-neutral-200 transition-all duration-200 hover:text-black"/></button>
-                   
+                        addData();
+                    }}><PlusIcon
+                        className="select-none h-10 text-white hover:bg-neutral-200 transition-all duration-200 hover:text-black"/>
+                    </button>
+
 
                 </div>
 
@@ -66,6 +97,6 @@ export default function TexturepackModal ({ change }) {
 
             </div>
         </div>
-    </div>
+        </div>
     )
 }

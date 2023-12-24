@@ -1,7 +1,7 @@
 import {XMarkIcon} from "@heroicons/react/20/solid";
 import { useState, useEffect } from "react";
 import ReactSkinview3d from "react-skinview3d"
-import { db } from '@/firebase-config'
+import { db } from '../../../firebase-config'
 import { doc, setDoc } from "firebase/firestore";
 
 export default function SkinsModal({ change }) {
