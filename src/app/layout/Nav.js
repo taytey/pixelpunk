@@ -1,19 +1,37 @@
 import Link from "next/link";
-export default function Nav() {
+import {
+    SignedIn,
+    UserButton,
+    currentUser
+} from "@clerk/nextjs";
+
+export default async function Nav() {
+
+    const user = await currentUser();
+
     return(
-        <main>
             <nav className="fixed w-full z-50 start-0 py-3 bg-neutral-950 ">
                 <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                     <Link href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
                         <h1 className="text-[#60d394] font-montserrat font-black text-2xl tracking-tight hover:text-black hover:bg-neutral-200 transition-all duration-200">PIXELPUNK</h1>
                     </Link>
                     <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-                        <button type="button"
-                                className="font-montserrat tracking-widest text-white hover:bg-neutral-800 rounded-3xl focus:ring-4 focus:outline-none transition-all duration-500 focus:ring-neutral-300 font-medium text-sm px-6 py-2 text-center dark:hover:bg-neutral-700 dark:focus:ring-neutral-800 ">
-                            <Link href="/admin">ADMIN</Link></button>
-                        <button type="button"
-                                className="font-montserrat tracking-widest text-white hover:bg-neutral-800 rounded-3xl focus:ring-4 focus:outline-none transition-all duration-500 focus:ring-neutral-300 font-medium text-sm px-6 py-2 text-center dark:hover:bg-neutral-700 dark:focus:ring-neutral-800 ">
-                            <Link href="/signup ">SIGNUP</Link></button>
+                        { user?.id === "user_2aBjCZHCIex4UkDDmAAk1F0zbTU" &&
+                            <button type="button"
+                                    className="font-montserrat tracking-widest text-white hover:bg-neutral-800 rounded-3xl focus:ring-4 focus:outline-none transition-all duration-500 focus:ring-neutral-300 font-medium text-sm px-6 py-2 text-center dark:hover:bg-neutral-700 dark:focus:ring-neutral-800 ">
+                                <Link href="/admin">ADMIN</Link></button>
+                        }
+                        {!user &&
+                            <button type="button"
+                                    className="font-montserrat tracking-widest text-white hover:bg-neutral-800 rounded-3xl focus:ring-4 focus:outline-none transition-all duration-500 focus:ring-neutral-300 font-medium text-sm px-6 py-2 text-center dark:hover:bg-neutral-700 dark:focus:ring-neutral-800 ">
+                                <Link href="/signup">LOGIN</Link></button>
+
+                        }
+
+
+                        <SignedIn>
+                            <UserButton afterSignOutUrl="/"/>
+                        </SignedIn>
 
                         <button data-collapse-toggle="navbar-sticky" type="button"
                                 className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
@@ -45,6 +63,5 @@ export default function Nav() {
                     </div>
                 </div>
             </nav>
-        </main>
     )
 }

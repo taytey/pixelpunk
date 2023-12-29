@@ -9,11 +9,15 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@clerk/nextjs": "^4.29.1",
     "@codaworks/react-glow": "^1.0.4",
     "@heroicons/react": "^2.0.18",
     "@prisma/client": "^5.6.0",
+    "@radix-ui/react-progress": "^1.0.3",
+    "@radix-ui/themes": "^2.0.3",
     "@supabase/auth-helpers-nextjs": "^0.8.7",
-    "@supabase/supabase-js": "^2.38.5",
+    "@supabase/supabase-js": "^2.39.1",
+    "@tanstack/react-table": "^8.11.2",
     "@vercel/postgres": "^0.5.1",
     "embla-carousel-react": "^8.0.0-rc14",
     "firebase": "^10.7.1",
@@ -21,13 +25,16 @@
     "hypixel-api-reborn": "^11.0.1",
     "net": "^1.0.2",
     "next": "14.0.3",
+    "next-auth": "^4.24.5",
     "next-cloudinary": "^5.10.0",
     "node": "^21.2.0",
     "react": "^18",
     "react-dom": "^18",
+    "react-loader-spinner": "^6.1.6",
     "react-scroll": "^1.9.0",
     "react-scroll-parallax": "^3.4.5",
     "react-skinview3d": "^5.0.2",
+    "server-only": "^0.0.1",
     "uuid": "^9.0.1"
   },
   "devDependencies": {

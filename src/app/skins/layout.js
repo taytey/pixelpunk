@@ -1,4 +1,4 @@
-import Nav from '../../app/layout/nav'
+import Nav from '../layout/Nav'
 export default function SkinsLayout({
                                            children, // will be a page or nested layout
                                        }) {
