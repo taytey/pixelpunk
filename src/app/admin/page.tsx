@@ -1,8 +1,10 @@
 'use client'
 import { useState} from "react";
-import TexturepackModal from "../components/admin/texturepackModal";
+import TexturepackModal from "../components/admin/TexturepackModal";
 import SkinsModal from "../components/admin/skinsModal";
 import CreateButtons from "../components/admin/CreateButtons";
+import {AnimatePresence} from "framer-motion";
+
 
 export default function Admin({user}) {
     const [texturepackVisibility, setTexturepackVisibility ] = useState(false);
@@ -30,15 +32,15 @@ export default function Admin({user}) {
                     <CreateButtons setTexturepackVisibility={setTexturepackVisibility}
                                    setSkinVisibility={setSkinVisibility}/>
                 </div>
+                <AnimatePresence>
+                    {texturepackVisibility &&
+                        <TexturepackModal change={handleTexturepackVisibility}/>
+                    }
 
-                {texturepackVisibility &&
-                    <TexturepackModal change={handleTexturepackVisibility}/>
-                }
-
-                {skinVisibility &&
-                    <SkinsModal change={handleSkinsVisibility}/>
-                }
-
+                    {skinVisibility &&
+                        <SkinsModal change={handleSkinsVisibility}/>
+                    }
+            </AnimatePresence>
             </div>
         )
 }

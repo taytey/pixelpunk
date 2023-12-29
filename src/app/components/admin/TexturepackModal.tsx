@@ -1,10 +1,11 @@
 import {XMarkIcon} from "@heroicons/react/20/solid";
-import { PlusIcon} from "@heroicons/react/24/outline";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { ref, uploadBytes, getDownloadURL, getStorage } from "firebase/storage";
 import { storage, db } from '../../..//firebase-config'
 import {doc, setDoc, serverTimestamp, collection} from "firebase/firestore";
 import { v4 as uuidv4 } from 'uuid';
+import { motion} from "framer-motion";
+
 
 
 export default function TexturepackModal ({ change }) {
@@ -49,6 +50,12 @@ export default function TexturepackModal ({ change }) {
     };
 
     return (
+        <motion.div
+            initial={{opacity: 0}}
+            animate={{opacity: 1}}
+            exit={{opacity: 0}}
+            transition={{ease: "easeInOut", duration: 0.2}}
+        >
         <div className=" border-2 border-neutral-700 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-5/6 w-5/6 backdrop-blur-2xl bg-neutral-950/90 transition-all duration-500 inset-0 z-50 drop-shadow-2xl rounded-2xl">
             <XMarkIcon
                 onClick={() => change()}
@@ -77,7 +84,7 @@ export default function TexturepackModal ({ change }) {
                         setDescription(event.target.value)
                     }}
                               className="bg-black focus:placeholder:text-opacity-0 select-none placeholder:text-neutral-700 outline-0 focus:bg-neutral-900 transition-all duration-500 font-extrabold text- rounded-lg focus:ring-0 focus:ring-offset-0 placeholder:font-extralight placeholder:tracking-widest placeholder:pl-10"
-                              placeholder="Description" rows="10" cols="50"></textarea>
+                              placeholder="Description" rows={10} cols={50}></textarea>
                     <input
                         className="block w-full text-sm text-neutral-900 border border-neutral-900 rounded-lg cursor-pointer bg-neutral-800 focus:outline-none dark:border-gray-600 dark:placeholder-gray-400"
                         type="file"
@@ -86,11 +93,10 @@ export default function TexturepackModal ({ change }) {
                         }}
                     />
 
-                    <button onClick={() => {
+                    <button className="hover:bg-stone-800 transition-all duration-500 p-5 font-montserrat rounded-2xl tracking-widest" onClick={() => {
                         uploadFile();
                         addData();
-                    }}><PlusIcon
-                        className="select-none h-10 text-white hover:bg-neutral-200 transition-all duration-200 hover:text-black"/>
+                    }}>Submit
                     </button>
 
 
@@ -99,5 +105,6 @@ export default function TexturepackModal ({ change }) {
         </div>
         </div>
         </div>
+        </motion.div>
     )
 }

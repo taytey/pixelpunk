@@ -1,6 +1,7 @@
 import {motion} from "framer-motion";
 import { XMarkIcon} from "@heroicons/react/20/solid";
 import {HeartIcon, PlusIcon} from "@heroicons/react/24/outline";
+import Image from 'next/image'
 
 
 export default function TextureModal ({setVisibility, name, author, thumbnail, description}) {
@@ -14,7 +15,7 @@ export default function TextureModal ({setVisibility, name, author, thumbnail, d
 
             <div className=" flex items-center justify-center">
                 <div
-                    className="border-2 border-neutral-700 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-5/6 w-5/6 backdrop-blur-2xl bg-neutral-950/90 transition-all duration-500 inset-0 z-50 drop-shadow-2xl rounded-2xl">
+                    className="border-2 border-neutral-700 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-5/6 w-5/6 backdrop-blur-2xl bg-neutral-950 transition-all duration-500 inset-0 z-50 drop-shadow-2xl rounded-2xl">
                     <div className="flex justify-between">
                         <div>
                             <h1 className="text-neutral-400 text-3xl tracking-widest pt-6 font-montserrat font-light select-none pl-11">{name}</h1>
@@ -29,9 +30,15 @@ export default function TextureModal ({setVisibility, name, author, thumbnail, d
                         </button>
                     </div>
                     <div className="flex justify-between">
-                        <img width="700"
-                             className=" border-neutral-700 rounded-xl opacity-75 hover:opacity-100 ml-10 mt-5 drop-shadow-2xl shadow-black transition-all duration-1000"
-                             src={thumbnail} alt="test"/>
+                        <Image
+                            alt="test"
+                            src={thumbnail}
+                            width={700}
+                            height={700}
+                            priority
+                            className="border-neutral-700 rounded-xl opacity-75 hover:opacity-100 ml-10 mt-5 drop-shadow-2xl shadow-black transition-all duration-1000"
+                        />
+
                         <p className="text-neutral-400 tracking-widest font-montserrat font-light text-xl m-5 select-none">{description}</p>
                     </div>
                     <div className="flex justify-evenly absolute right-0 bottom-5 space-x-40 mr-10">
