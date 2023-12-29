@@ -1,10 +1,6 @@
 export default function CreateButtons ({setTexturepackVisibility, setSkinVisibility}) {
     return (
         <div>
-            <div className="pt-40 pl-20">
-                <h1 className="font-montserrat tracking-widest font-bold text-5xl select-none">Admin
-                    Dashboard</h1>
-            </div>
             <div className="pt-20 pl-20">
                 <h1 className="font-montserrat font-light tracking-widest text-3xl">Add content</h1>
             </div>

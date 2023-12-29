@@ -1,11 +1,14 @@
-
+import Admin from "../admin/page"
 import Nav from "../layout/Nav.js";
+import {currentUser} from "@clerk/nextjs";
 
-export default function AdminLayout({children}) {
+export default async function AdminLayout({children}) {
+    const user = await currentUser()
+
     return (
         <section>
             <Nav/>
-            {children}
+            <Admin user = {user.username}/>
         </section>
     )
 

@@ -49,13 +49,18 @@ export default function TexturepackModal ({ change }) {
     };
 
     return (
-        <div className="absolute flex justify-between bg-black top-40">
-        <XMarkIcon className=" text-white"/>
+        <div className=" border-2 border-neutral-700 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-5/6 w-5/6 backdrop-blur-2xl bg-neutral-950/90 transition-all duration-500 inset-0 z-50 drop-shadow-2xl rounded-2xl">
+            <XMarkIcon
+                onClick={() => change()}
+                className="hover:bg-neutral-800 rounded-3xl h-6 w-6 m-5 opacity-10 hover:opacity-50 text-neutral-300 transition-all duration-500"/>
+
         <div>
-            <div className="flex justify-center items-center">
-                <h1 className="text-5xl font-montserrat tracking-widest m-10 select-none font-bold">Add a new <span className="hover:text-black transition-all duration-200 hover:bg-neutral-200">Texturepack</span></h1>
+        <div className="flex items-center m-20">
+            <div>
+                <h1 className="text-5xl font-montserrat tracking-widest m-10 select-none font-bold"><span className="select-none font-light font-montserrat text-3xl tracking-widest">add a new</span> <span className="hover:text-black transition-all duration-200 hover:bg-neutral-200">Texturepack</span></h1>
             </div>
-            <div className="flex flex-col w-screen m-10  items-center justify-center">
+
+            <div className="flex flex-col items-center justify-center">
                 <div className="flex flex-col gap-10">
                     <input onChange={(event) => {
                         setName(event.target.value)
@@ -90,12 +95,8 @@ export default function TexturepackModal ({ change }) {
 
 
                 </div>
-
-                <div onClick={() => change()}>
-                    Close
-                </div>
-
             </div>
+        </div>
         </div>
         </div>
     )

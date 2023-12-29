@@ -2,9 +2,9 @@
 import { useState} from "react";
 import TexturepackModal from "../components/admin/texturepackModal";
 import SkinsModal from "../components/admin/skinsModal";
-import {supabase} from "../supabase"
 import CreateButtons from "../components/admin/CreateButtons";
-export default function Admin() {
+
+export default function Admin({user}) {
     const [texturepackVisibility, setTexturepackVisibility ] = useState(false);
     const [skinVisibility, setSkinVisibility] = useState(false);
 
@@ -18,7 +18,18 @@ export default function Admin() {
 
         return (
             <div>
-                <CreateButtons setTexturepackVisibility={setTexturepackVisibility} setSkinVisibility={setSkinVisibility}/>
+                <div className="flex p-10 justify-between">
+                    <div >
+                        <h1 className="font-montserrat tracking-widest font-bold text-5xl select-none">Admin
+                            Dashboard</h1>
+                    </div>
+                    <h1 className="text-3xl font-montserrat tracking-widest">Welcome back, <span className="font-montserrat font-bold text-neutral-500 select-none hover:text-black hover:bg-[#60D394] transition-all duration-200">{user}</span></h1>
+                </div>
+
+                <div className="">
+                    <CreateButtons setTexturepackVisibility={setTexturepackVisibility}
+                                   setSkinVisibility={setSkinVisibility}/>
+                </div>
 
                 {texturepackVisibility &&
                     <TexturepackModal change={handleTexturepackVisibility}/>

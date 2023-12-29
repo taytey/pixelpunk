@@ -10,7 +10,7 @@ export default async function Nav() {
     const user = await currentUser();
 
     return(
-            <nav className="fixed w-full z-50 start-0 py-3 bg-neutral-950 ">
+            <nav className="relative w-full z-50 start-0 py-3 bg-neutral-950 ">
                 <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                     <Link href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
                         <h1 className="text-[#60d394] font-montserrat font-black text-2xl tracking-tight hover:text-black hover:bg-neutral-200 transition-all duration-200">PIXELPUNK</h1>
