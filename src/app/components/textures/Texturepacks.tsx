@@ -11,6 +11,8 @@ import {
 import { db } from "../../../firebase-config"
 import TextureModal from "./TextureModal";
 import MasonryGrid from "./MasonryGrid";
+import {Timestamp} from "firebase/firestore";
+import {timestamp} from "yaml/dist/schema/yaml-1.1/timestamp";
 
 export default function Texturepacks() {
 
@@ -24,6 +26,7 @@ export default function Texturepacks() {
     const [description, setDescription] = useState();
     const [hovered, setHovered] = useState(null);
     const [ downloads, setDownloads ] = useState(0);
+    const [ uploadDate, setUploadDate ] = useState ();
 
     useEffect(() => {
         const q = query(
@@ -41,15 +44,14 @@ export default function Texturepacks() {
         return () => {
             unsub();
         };
-
     }, []);
 
     return(
             <div>
-                <MasonryGrid setHovered={setHovered} hovered={hovered} texturepacks={texturepacks} setVisibility={setVisibility} setAuthor={setAuthor} setDescription={setDescription} setName={setName} setThumbnail={setThumbnail}/>
+                <MasonryGrid uploadDate={uploadDate} setHovered={setHovered} setUploadDate={setUploadDate} hovered={hovered} texturepacks={texturepacks} setVisibility={setVisibility} setAuthor={setAuthor} setDescription={setDescription} setName={setName} setThumbnail={setThumbnail}/>
                 <AnimatePresence>
                     {visibility &&
-                        <TextureModal setVisibility={setVisibility} author ={author} name = {name} description = {description} thumbnail={thumbnail}/>
+                        <TextureModal setUploadDate={setUploadDate} setVisibility={setVisibility} uploadDate = {uploadDate} author = {author} name = {name} description = {description} thumbnail = {thumbnail}/>
                     }
                 </AnimatePresence>
             </div>

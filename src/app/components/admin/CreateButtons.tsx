@@ -8,13 +8,13 @@ export default function CreateButtons ({setTexturepackVisibility, setSkinVisibil
                 <div onClick={() => {
                     setTexturepackVisibility(true)
                 }}
-                     className="hover:opacity-50 hover:border-4 bg-neutral-400 h-96 w-96 flex items-center justify-center opacity-75 rounded-lg hover:scale-110 transition-all duration-500">
+                     className=" hover:bg-[#60D394] hover:border-2 border-black hover:text-black bg-neutral-400 h-96 w-96 flex items-center justify-center opacity-75 rounded-lg hover:scale-110 transition-all duration-500">
                     <h1 className="select-none font-montserrat tracking-widest font-bold text-3xl">Texturepacks</h1>
                 </div>
                 <div onClick={() => {
                     setSkinVisibility(true)
                 }}
-                     className="hover:opacity-50 hover:border-4 bg-neutral-400 h-96 w-96 flex items-center justify-center opacity-75 rounded-lg hover:scale-110 transition-all duration-500">
+                     className="hover:bg-[#60D394] hover:border-2 border-black hover:text-black bg-neutral-400 h-96 w-96 flex items-center justify-center opacity-75 rounded-lg hover:scale-110 transition-all duration-500">
                     <h1 className="select-none font-montserrat tracking-widest font-bold text-3xl">Players</h1>
                 </div>
             </div>
