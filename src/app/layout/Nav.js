@@ -4,13 +4,14 @@ import {
     UserButton,
     currentUser
 } from "@clerk/nextjs";
+import SearchIcon from "./SearchIcon";
 
 export default async function Nav() {
 
     const user = await currentUser();
 
     return(
-            <nav className="relative w-full start-0 py-3 bg-none ">
+            <nav className="relative w-full start-0 py-3 bg-none bg-neutral-950/50">
                 <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                     <Link href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
                         <h1 className="text-[#60d394] text-2xl font-pixel2 hover:text-black hover:bg-neutral-200 transition-all duration-200">PixelPunk</h1>
@@ -27,7 +28,6 @@ export default async function Nav() {
                                 <Link href="/signup">LOGIN</Link></button>
 
                         }
-
 
                         <SignedIn>
                             <UserButton afterSignOutUrl="/"/>
