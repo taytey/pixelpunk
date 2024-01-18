@@ -1,22 +1,26 @@
 import {XMarkIcon} from "@heroicons/react/20/solid";
-import {motion} from "framer-motion";
+import {AnimatePresence, motion} from "framer-motion";
 import {useEffect, useState} from "react";
 import {collection, onSnapshot, query, where} from "firebase/firestore";
 import {db} from "../../firebase-config";
 import algoliasearch from 'algoliasearch/lite';
-import {Hits, InstantSearch, SearchBox} from 'react-instantsearch';
-import { useConnector } from 'react-instantsearch';
+import {Hits, InstantSearch, SearchBox, useHits} from 'react-instantsearch';
 import SearchResults from "../layout/SearchResults";
 
-export default function WebsiteSearch({open, setOpen}) {
+
+
+export default function WebsiteSearch({open, setOpen, props}) {
 
     const [clicked, setClicked ] = useState(false);
     const [searchResults, setSearchResults ] = useState([]);
     const [input, setInput ] = useState('try this')
 
 
-        const searchClient = algoliasearch('ZBNXSKFARC', '8628308e9cfcc32b1181e4bc5b7e2325');
+    const searchClient = algoliasearch('ZBNXSKFARC', '8628308e9cfcc32b1181e4bc5b7e2325');
     const colletionRef = collection(db, 'texturepacks');
+
+
+
 
     useEffect(() => {
         const q = query(colletionRef, where(input, '==', true));
@@ -35,16 +39,16 @@ export default function WebsiteSearch({open, setOpen}) {
     }, []);
 
     return (
-
+<AnimatePresence>
         <motion.div
-            initial={{opacity: 0}}
-            animate={{opacity: 1}}
+            initial={{ opacity: 0}}
+            animate={{ opacity: 1}}
             exit={{opacity: 0}}
             transition={{ease: "easeOut", duration: 0.2}}
         >
 
             <div
-                className="shadow-2xl border-neutral-700 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-5/6 w-5/6 backdrop-blur-2xl bg-neutral-900/95 transition-all duration-500 inset-0 drop-shadow-2xl rounded-2xl">
+                className="overflow-scroll shadow-2xl border-neutral-700 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-5/6 w-5/6 backdrop-blur-2xl bg-neutral-900/95 transition-all duration-500 inset-0 drop-shadow-2xl rounded-2xl">
                 <InstantSearch searchClient={searchClient} indexName="pixelpunk">
                     <SearchBox
                         searchAsYouType={true}
@@ -70,13 +74,13 @@ export default function WebsiteSearch({open, setOpen}) {
                     </motion.div>
 
                 </div>
-                <Hits
-                    hitComponent={({hit}) => <SearchResults hit={hit}/>}
-
-                    classNames={{root: 'text-white absolute'}}/>
+                    <div className=" h-screen mt-40">
+                        <SearchResults/>
+                    </div>
 
                 </InstantSearch>
             </div>
         </motion.div>
+</AnimatePresence>
     );
 }

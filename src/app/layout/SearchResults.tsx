@@ -1,12 +1,17 @@
-export default function SearchResults(hit) {
+import { useHits } from 'react-instantsearch';
+import SearchHits from "./SearchHits";
+
+export default function SearchResults() {
+
+    const { hits, results, sendEvent } = useHits();
+
+
     return(
-        <div>
-            {/*{name.map(name => <div key={name.nmae}>{name.name}</div>)}*/}
-            {Object.keys(hit).map((name, i) => (
-                <div className="travelcompany-input" key={i}>
-                    <span className="input-label">key: {i} Name: {hit[name]}</span>
-                </div>
-            ))}
+        <div className="grid grid-cols-4">
+            {hits.map((hit) =>
+                <SearchHits hit={hit} />
+
+            )}
         </div>
     )
 }

@@ -40,10 +40,15 @@ export default function MasonryGrid ({setHovered, hovered, texturepacks, setVisi
                 <div key={texturepack.id}>
                     <button onMouseEnter={() =>  setHovered(texturepack.id)} onMouseLeave={() => {setHovered(null)}} onClick={() => { setVisibility(true), setName(texturepack.name), setThumbnail(texturepack.thumbnail), setAuthor(texturepack.author), setDescription(texturepack.description), convertTimestamp(texturepack.createdAt)}}>
                         <motion.div
-                            initial={{opacity: 0}}
-                            animate={{opacity: 100}}
+
                             transition={{ease: "easeOut", duration: 1}}
                         >
+                            <motion.div
+                                initial={{opacity: 0}}
+                                animate={{opacity: 100}}
+                            >
+
+
                             <div className="flex justify-center items-center">
                                 <motion.div
                                     className="text-stone-300 z-0 absolute text-3xl font-medium font-pixel2 tracking-widest"
@@ -58,6 +63,8 @@ export default function MasonryGrid ({setHovered, hovered, texturepacks, setVisi
                                         </div>
                                     }
                                 </motion.div>
+                                <div>
+
 
                                     <Image
                                         width={0}
@@ -67,7 +74,9 @@ export default function MasonryGrid ({setHovered, hovered, texturepacks, setVisi
                                         className="brightness-75 p-2 hover:rounded-md opacity-100 hover:border-opacity-100 hover:opacity-20 border-2  border-dashed rounded-3xl hover:border-neutral-200 border-neutral-700 transition-all duration-500"
                                         key={texturepack.id}
                                         src={texturepack.thumbnail} alt={texturepack.name}/>
+                                </div>
                             </div>
+                            </motion.div>
 
                         </motion.div>
                     </button>

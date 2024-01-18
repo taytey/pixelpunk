@@ -28,6 +28,7 @@
     "framer-motion": "^10.16.16",
     "hypixel-api-reborn": "^11.0.1",
     "hypixel.ts": "^1.1.4",
+    "instantsearch.css": "^8.1.0",
     "net": "^1.0.2",
     "next": "^14.0.4",
     "next-auth": "^4.24.5",

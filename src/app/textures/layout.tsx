@@ -17,6 +17,7 @@ export default function TexturesLayout({
                 <Suspense fallback={<Loading/>}>
                     {children}
                 </Suspense>
+
                 <SearchIcon />
                 <PortfolioButton />
             </section>
