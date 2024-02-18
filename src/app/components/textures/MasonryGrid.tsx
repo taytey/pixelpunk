@@ -36,6 +36,7 @@ export default function MasonryGrid ({setHovered, hovered, texturepacks, setVisi
                     whileHover={{scale: 1.03}}
                     whileTap={{scale: 0.8}}
                     transition={{ease: "easeOut", duration: 0.3}}
+
                 >
                 <div key={texturepack.id}>
                     <button onMouseEnter={() =>  setHovered(texturepack.id)} onMouseLeave={() => {setHovered(null)}} onClick={() => { setVisibility(true), setName(texturepack.name), setThumbnail(texturepack.thumbnail), setAuthor(texturepack.author), setDescription(texturepack.description), convertTimestamp(texturepack.createdAt)}}>
@@ -51,16 +52,21 @@ export default function MasonryGrid ({setHovered, hovered, texturepacks, setVisi
 
                             <div className="flex justify-center items-center">
                                 <motion.div
-                                    className="text-stone-300 z-0 absolute text-3xl font-medium font-pixel2 tracking-widest"
+                                    className="z-0 absolute "
                                     initial={{opacity: 0}}
                                     animate={{opacity: 100}}
                                     transition={{ease: "easeOut", duration: 1}}
                                 >
                                     {hovered === texturepack.id &&
                                         <div>
+                                            <div className="text-stone-300 text-3xl font-medium font-pixel2 tracking-widest"
+                                            >{texturepack.name}</div>
+                                            <div>
+                                                <h1 className="text-stone-400 text-lg font-pixel2 tracking-widest">{texturepack.author}</h1>
+                                            </div>
 
-                                        {texturepack.name}
                                         </div>
+
                                     }
                                 </motion.div>
                                 <div>
@@ -71,7 +77,7 @@ export default function MasonryGrid ({setHovered, hovered, texturepacks, setVisi
                                         height={0}
                                         sizes="75vw"
                                         layout="responsive"
-                                        className="brightness-75 p-2 hover:rounded-md opacity-100 hover:border-opacity-100 hover:opacity-20 border-2  border-dashed rounded-3xl hover:border-neutral-200 border-neutral-700 transition-all duration-500"
+                                        className="brightness-75 shadow-2xl shadow-black hover:shadow-neutral-900 p-2 hover:rounded-md opacity-100 hover:border-opacity-100 hover:opacity-20 border-2  border-dashed rounded-3xl hover:border-neutral-200 border-neutral-800 transition-all duration-500"
                                         key={texturepack.id}
                                         src={texturepack.thumbnail} alt={texturepack.name}/>
                                 </div>

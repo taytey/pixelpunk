@@ -9,9 +9,9 @@ export default function SearchIcon () {
     const [open, setOpen ] = useState(false);
 
     return (
-        <div>
+        <div className="z-50">
             <button onClick={() => {setOpen(true)}}>
-                <motion.div className="fixed bottom-0 m-6 ml-7"
+                <motion.div className="fixed bottom-0 m-6 ml-7 z-50"
                     whileHover={{scale: 1.2}}
                     whileTap={{scale: 0.8}}
                     transition={{ease: "easeOut", duration: 0.3}}

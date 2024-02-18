@@ -2,6 +2,7 @@ import './globals.css'
 import { ClerkProvider } from '@clerk/nextjs'
 import localFont from "@next/font/local";
 import {Pixelify_Sans, Silkscreen, VT323} from "@next/font/google";
+import Footer from './layout/Footer';
 
 
 
@@ -39,6 +40,7 @@ export default function RootLayout({ children }) {
           <html lang="en" className={`${pixelify.variable} ${silkscreen.variable} ${vt323.variable}`}>
               <body>
                 {children}
+                <Footer/>
               </body>
           </html>
       </ClerkProvider>

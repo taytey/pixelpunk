@@ -17,7 +17,7 @@ export default function SearchHits({hit}) {
 
 
                 <div
-                    className=" grid-cols-4 border border-dashed rounded-2xl m-8 p-2 flex-col border-neutral-700 hover:border-neutral-300 transition-all duration-500">
+                    className=" grid-cols-4 border-2 border-dashed rounded-2xl m-8 p-2 flex-col border-neutral-800 hover:border-neutral-300 transition-all duration-500">
                     <motion.div
                         initial={{ opacity: 0}}
                         animate={{ opacity: 100}}

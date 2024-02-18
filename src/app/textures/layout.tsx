@@ -2,7 +2,6 @@ import {Suspense} from "react";
 import Loading from "../textures/loading";
 import Nav from "../layout/Nav";
 import TayteButton from "../../app/components/hero/taytebutton";
-import PortfolioButton from "../../app/components/hero/portfoliobutton";
 import SearchIcon from "../layout/SearchIcon";
 import {MagnifyingGlassIcon} from "@heroicons/react/24/outline";
 
@@ -19,7 +18,7 @@ export default function TexturesLayout({
                 </Suspense>
 
                 <SearchIcon />
-                <PortfolioButton />
+
             </section>
 
 

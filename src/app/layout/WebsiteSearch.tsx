@@ -48,7 +48,7 @@ export default function WebsiteSearch({open, setOpen, props}) {
         >
 
             <div
-                className="overflow-scroll shadow-2xl border-neutral-700 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-5/6 w-5/6 backdrop-blur-2xl bg-neutral-900/95 transition-all duration-500 inset-0 drop-shadow-2xl rounded-2xl">
+                className="z-50 overflow-scroll shadow-2xl border-neutral-700 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-5/6 w-5/6 backdrop-blur-2xl bg-neutral-900/95 transition-all duration-500 inset-0 drop-shadow-2xl rounded-2xl">
                 <InstantSearch searchClient={searchClient} indexName="pixelpunk">
                     <SearchBox
                         searchAsYouType={true}

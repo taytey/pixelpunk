@@ -1,18 +1,19 @@
-export default function StatsSearch({setSearch, winstreak, search, setWinstreak, setRank, rank, setPlayer, uuid, setUUID}) {
+export default function StatsSearch({setSearch, winstreak, search, setWinstreak, setRank, rank, setPlayer, uuid, setUUID, setBedsBroken, bedsBroken}) {
 
-    const apikey = "c083c8e9-b36a-4f52-9273-e11417734db6"
+    const apikey = "256f8bdb-931d-41e5-9fea-6b3b5dc69e00"
 
     const fetchUser = async () => {
         const response = await fetch(`https://api.hypixel.net/v2/player?key=${apikey}&name=${search}
         `, {
             method: 'GET',
             headers: {
-                'API-Key' : 'c083c8e9-b36a-4f52-9273-e11417734db6',
+                'API-Key' : apikey,
             }
         }) .then(response => response.json())
-        setUUID(response.player._id)
+        setUUID(response.player_id)
         setRank(response.player.newPackageRank)
         setPlayer(response.player.playername)
+        setBedsBroken(response.player.stats.Bedwars.beds_broken_bedwars)
         console.log(response);
     }
     return (
