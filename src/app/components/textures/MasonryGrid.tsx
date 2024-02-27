@@ -3,7 +3,7 @@ import Image from 'next/image'
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import {Timestamp} from "firebase/firestore";
 
-export default function MasonryGrid ({setHovered, hovered, texturepacks, setVisibility, setName, setThumbnail, setAuthor, setDescription, setUploadDate, uploadDate}) {
+export default function MasonryGrid ({setHovered, hovered, texturepacks, setVisibility, setName, setThumbnail, setAuthor, setDescription, setUploadDate, uploadDate, downloadLink, setDownloadLink}) {
 
     const convertTimestamp = (timestamp) => {
 
@@ -39,7 +39,7 @@ export default function MasonryGrid ({setHovered, hovered, texturepacks, setVisi
 
                 >
                 <div key={texturepack.id}>
-                    <button onMouseEnter={() =>  setHovered(texturepack.id)} onMouseLeave={() => {setHovered(null)}} onClick={() => { setVisibility(true), setName(texturepack.name), setThumbnail(texturepack.thumbnail), setAuthor(texturepack.author), setDescription(texturepack.description), convertTimestamp(texturepack.createdAt)}}>
+                    <button onMouseEnter={() =>  setHovered(texturepack.id)} onMouseLeave={() => {setHovered(null)}} onClick={() => { setVisibility(true), setName(texturepack.name), setThumbnail(texturepack.thumbnail), setAuthor(texturepack.author), setDescription(texturepack.description), convertTimestamp(texturepack.createdAt), setDownloadLink(texturepack.downloadLink)}}>
                         <motion.div
 
                             transition={{ease: "easeOut", duration: 1}}

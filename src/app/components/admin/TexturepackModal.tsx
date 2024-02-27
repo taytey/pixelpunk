@@ -1,5 +1,5 @@
 import {XMarkIcon} from "@heroicons/react/20/solid";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ref, uploadBytes, getDownloadURL, getStorage } from "firebase/storage";
 import { storage, db } from '../../..//firebase-config'
 import {doc, setDoc, serverTimestamp, collection} from "firebase/firestore";
@@ -17,7 +17,10 @@ export default function TexturepackModal ({ change }) {
     const [ thumbnail, setThumbnail] = useState('');
     const [ author, setAuthor] = useState('');
     const [ description, setDescription] = useState('');
+    const [ downloadLink, setDownloadLink ] = useState('');
     const collectionRef = collection(db, 'texturepacks');
+
+    
 
     //adds data via input fields to firestore texturepacks collection
     const texturepackData = {
@@ -25,6 +28,7 @@ export default function TexturepackModal ({ change }) {
         thumbnail,
         description,
         author,
+        downloadLink,
         createdAt: serverTimestamp(),
         id: uuidv4(),
     }
@@ -62,12 +66,12 @@ export default function TexturepackModal ({ change }) {
                 className="hover:bg-neutral-800 rounded-3xl h-6 w-6 m-5 opacity-10 hover:opacity-50 text-neutral-300 transition-all duration-500"/>
 
         <div>
-        <div className="flex items-center m-20">
+        <div className="flex items-center m-10">
             <div>
                 <h1 className="text-5xl font-montserrat tracking-widest m-10 select-none font-bold"><span className="select-none font-light font-montserrat text-3xl tracking-widest">add a new</span> <span className="hover:text-black transition-all duration-200 hover:bg-neutral-200">Texturepack</span></h1>
             </div>
 
-            <div className="flex flex-col items-center justify-center">
+            <div className="flex flex-col items-center justify-center overflow-auto">
                 <div className="flex flex-col gap-10">
                     <input onChange={(event) => {
                         setName(event.target.value)
@@ -79,12 +83,17 @@ export default function TexturepackModal ({ change }) {
                     }}
                            className="bg-black focus:placeholder:text-opacity-0 select-none tracking-widest placeholder:text-neutral-700 outline-0 focus:bg-neutral-900 transition-all duration-500 font-extrabold h-20 text-5xl rounded-lg focus:ring-0 focus:ring-offset-0 placeholder:font-extralight placeholder:tracking-widest placeholder:pl-10"
                            value={author} placeholder="Author"/>
+                    <input onChange={(event) => {
+                        setDownloadLink(event.target.value)
+                    }}
+                           className="bg-black focus:placeholder:text-opacity-0 select-none tracking-widest placeholder:text-neutral-700 outline-0 focus:bg-neutral-900 transition-all duration-500 font-extrabold h-20 text-5xl rounded-lg focus:ring-0 focus:ring-offset-0 placeholder:font-extralight placeholder:tracking-widest placeholder:pl-10"
+                           value={downloadLink} placeholder="Download Link"/>
 
                     <textarea onChange={(event) => {
                         setDescription(event.target.value)
                     }}
-                              className="bg-black focus:placeholder:text-opacity-0 select-none placeholder:text-neutral-700 outline-0 focus:bg-neutral-900 transition-all duration-500 font-extrabold text- rounded-lg focus:ring-0 focus:ring-offset-0 placeholder:font-extralight placeholder:tracking-widest placeholder:pl-10"
-                              placeholder="Description" rows={10} cols={50}></textarea>
+                              className="bg-black focus:placeholder:text-opacity-0 select-none placeholder:text-neutral-700 outline-0 focus:bg-neutral-900 transition-all duration-500 font-extrabold rounded-lg focus:ring-0 focus:ring-offset-0 placeholder:font-extralight placeholder:tracking-widest placeholder:pl-10"
+                              placeholder="Description" rows={10} cols={30}></textarea>
                     <input
                         className="block w-full text-sm text-neutral-900 border border-neutral-900 rounded-lg cursor-pointer bg-neutral-800 focus:outline-none dark:border-gray-600 dark:placeholder-gray-400"
                         type="file"

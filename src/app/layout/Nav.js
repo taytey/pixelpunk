@@ -56,7 +56,7 @@ export default async function Nav() {
                                 <Link href="/textures" className="block font-medium  font-pixel  my-2 mx-3 text-neutral-300 hover:text-neutral-500 transition-all duration-200 tracking-widest">t e x t u r e s</Link>
                             </li>
                             <li>
-                                <Link href="/stats" className="block font-medium font-pixel my-2 mx-3 text-neutral-300 hover:text-neutral-500 transition-all duration-200 tracking-widest">p l a y e r s</Link>
+                                <Link href="/underdevelopment" className="block font-medium font-pixel my-2 mx-3 text-neutral-300 hover:text-neutral-500 transition-all duration-200 tracking-widest">p l a y e r s</Link>
                             </li>
                         </ul>
                     </div>

@@ -27,6 +27,7 @@ export default function Texturepacks() {
     const [hovered, setHovered] = useState(null);
     const [ downloads, setDownloads ] = useState(0);
     const [ uploadDate, setUploadDate ] = useState ();
+    const [ downloadLink, setDownloadLink ] = useState ();
 
     useEffect(() => {
         const q = query(
@@ -48,10 +49,10 @@ export default function Texturepacks() {
 
     return(
             <div>
-                <MasonryGrid uploadDate={uploadDate} setHovered={setHovered} setUploadDate={setUploadDate} hovered={hovered} texturepacks={texturepacks} setVisibility={setVisibility} setAuthor={setAuthor} setDescription={setDescription} setName={setName} setThumbnail={setThumbnail}/>
+                <MasonryGrid uploadDate={uploadDate} setHovered={setHovered} setUploadDate={setUploadDate} hovered={hovered} texturepacks={texturepacks} setVisibility={setVisibility} setAuthor={setAuthor} setDescription={setDescription} setName={setName} setThumbnail={setThumbnail} downloadLink={downloadLink} setDownloadLink={setDownloadLink}/>
                 <AnimatePresence>
                     {visibility &&
-                        <TextureModal setUploadDate={setUploadDate} setVisibility={setVisibility} uploadDate = {uploadDate} author = {author} name = {name} description = {description} thumbnail = {thumbnail}/>
+                        <TextureModal setUploadDate={setUploadDate} setVisibility={setVisibility} uploadDate = {uploadDate} author = {author} name = {name} description = {description} thumbnail = {thumbnail} downloadLink={downloadLink}/>
                     }
                 </AnimatePresence>
             </div>
